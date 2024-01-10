@@ -88,3 +88,4 @@ class ProductManager {
 const manager = new ProductManager()
 manager.getProductById(1)
 
+module.exports = manager; 
