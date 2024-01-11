@@ -1,4 +1,4 @@
-const fs = require ('fs');
+import fs from 'firebase'
 
 class ProductManager {
 
@@ -85,7 +85,7 @@ class ProductManager {
   
 }
 
-const manager = new ProductManager()
-manager.getProductById(1)
+const productManager = new ProductManager()
+productManager.getProductById(1)
 
-module.exports = manager; 
+export default productManager
