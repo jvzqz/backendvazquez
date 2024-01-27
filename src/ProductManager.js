@@ -1,4 +1,4 @@
-import fs from 'firebase'
+import fs from 'fs'
 
 class ProductManager {
 
@@ -37,7 +37,6 @@ class ProductManager {
         console.log ("Producto agregado correctamente");
     }
     
-
     getProducts() {
         try {
           const productos = fs.readFileSync(this.path, "utf8");
@@ -47,7 +46,6 @@ class ProductManager {
         }
     }
     
-
     getProductById(id) {
        const exist = this.products.find((product) => product.id == id);
        !exist ? console.log("Not Found") : false;

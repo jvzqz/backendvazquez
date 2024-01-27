@@ -1,5 +1,5 @@
 import { Router } from "express";
-import productManager from "./ProductManager";
+import productManager from "../ProductManager.js";
 
 const productsrouter = Router ();
 
@@ -7,7 +7,7 @@ productsrouter.get("/", async(req,res)=>{
     try{
         const { limit } = req.query;
         const products = await productManager.getProducts();
-        const productslimit = products.slice(0,limit);
+        const productslimit = products.slice(0,limit);np
 
         if (!limit) {
             res.send ({productslimit})
@@ -21,7 +21,7 @@ productsrouter.get("/", async(req,res)=>{
 
 productsrouter.get("/:pid", async(req,res)=>{
         const productid = req.params.pid
-        const productId = await productManager.getProductById();
+        const productId = await productManager.getProductById(productid);
     try{
         if (!productid) return res.send ({productId})   
     }catch{
@@ -30,27 +30,31 @@ productsrouter.get("/:pid", async(req,res)=>{
 })
 
 productsrouter.post("/", async(req, res)=> {
-    const newproduct = productManager.addProduct();
+    const newProduct = req.body
+    const newproduct = productManager.addProduct(newProduct);
     try {
-        res.send = ({newproduct})
+        if (!newProduct) return res.send({newproduct})
     } catch {
         res.status(500).send(error.message);
     }
 })
 
 productsrouter.put("/:pid", async(req, res)=> {
-    const updateproduct = productManager.updateProduct()
+    const pid = req.params.pid
+    const UpdateProduct = req.body
+    const updateproduct = productManager.updateProducts(pid, UpdateProduct)
     try {
-        res.send = ({updateproduct})
+        res.send({updateproduct})
     } catch {
         res.status(500).send(error.message);
     }
 })
 
 productsrouter.delete("/:pid", async (req, res)=> {
-    const deleteproduct = productManager.deleteProduct()
+    const pid = req.params.pid
+    const deleteproduct = productManager.deleteProducts(pid)
     try {
-        res.send = ({deleteproduct})
+        res.send({deleteproduct})
     } catch {
         res.status(500).send(error.message);
     }

@@ -1,5 +1,5 @@
-import fs from 'firebase'
-import productManager from './ProductManager'
+import fs from 'fs'
+import productManager from './ProductManager.js'
 
 class CartManager {
     constructor(){
@@ -9,12 +9,7 @@ class CartManager {
         this.product = productManager.getProducts();
     } 
 
-    addCart (product) {
-        if (!product) {
-            console.error("No existe producto")
-            return
-        }
-
+    addCart () {
         const cart ={
             id: this.id++,
             product:[],
@@ -35,15 +30,15 @@ class CartManager {
         }
     }
 
-    getCartsById(id) {
-      const exist = this.carts.find((Carts) => this.carts.id == id);
+    getCartsById() {
+      const exist = this.carts.find((cart) => cart.id == id);
       !exist ? console.log("Not Found") : false;
       return exist;
    }
      
-   addProductToCart() {
-    const cart = this.getCartsById();
-    const product = productManager.getProductById();
+   addProductToCart(cid, pid) {
+    const cart = this.getCartsById(cid);
+    const product = productManager.getProductById(pid);
  
     if (!cart || !product) {
       return false; 
