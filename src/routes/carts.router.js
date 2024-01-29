@@ -7,8 +7,8 @@ cartsrouter.post("/", async(req, res)=> {
     const newcarts = cartManager.addCart();
     try {
         res.send({newcarts})
-    } catch {
-        res.status(500).send(error.message);
+    } catch (error){
+        console.log(error)
     }
 })
 
@@ -17,8 +17,8 @@ cartsrouter.get("/:cid", async(req, res)=> {
     const cartid = await cartManager.getCartsById(cid);
     try {
         res.send({cartid})
-    } catch {
-        res.status(500).send(error.message);
+    } catch (error){
+        console.log(error)
     }
 })
 
@@ -28,8 +28,8 @@ cartsrouter.post("/:cid/product/:pid", async(req, res)=> {
     const newproducttocart = cartManager.addProductToCart(cid, pid);
     try {
         res.send({newproducttocart})
-    } catch {
-        res.status(500).send(error.message);
+    } catch (error){
+        console.log(error)
     }
 })
 

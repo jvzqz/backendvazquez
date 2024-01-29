@@ -6,6 +6,10 @@
     <title>{{title}}</title>
 </head>
 <body>
-    {{{body}}}
+    <ul>
+    {{#each products}}
+      <li>{{this.name}} - ${{this.price}}</li>
+    {{/each}}
+  </ul>
 </body>
 </html>
