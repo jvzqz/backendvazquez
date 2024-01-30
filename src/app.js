@@ -23,5 +23,12 @@ app.use(express.static(__dirname+'/public'));
 
 app.use('/api/products', productsrouter);
 app.use ('/api/carts', cartsrouter);
-app.use ('/api/realtimeproducts', viewsrouter);
+app.use ('/api/viewsrouter', viewsrouter);
 
+const ListProducts = [];
+io.on('connection', socket => {
+    socket.on('message', data => {
+        ListProducts.push(data)
+        io.emit('productLogs', ListProducts)
+    })
+})
