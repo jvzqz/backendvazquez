@@ -25,8 +25,9 @@ app.use('/api/products', productsrouter);
 app.use ('/api/carts', cartsrouter);
 app.use ('/', viewsrouter);
 
+
 const ListProducts = [];
-io.on('connection', socket => {
+io.on('addProduct', socket => {
     socket.on('products', data => {
         ListProducts.push(data)
         io.emit('productLogs', ListProducts)

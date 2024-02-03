@@ -22,7 +22,30 @@
     </form>
 </body>
 
-<script src="/socket.io/socket.io.js"></script>
+<script src="/socket.io/socket.io.js">
+
+    const socket = io();
+    const productsList = document.getElementById('input-tittle')
+
+    productsList.addListener('keyup', evento =>{
+        if (evento.key === 'Enter') {
+            if (productsList.value.trim().lenght > 0) {
+                socket.emit('Lista de Productos', {productsList: productsList.value})
+                productsList.value = '';
+            }
+        }
+    })
+
+    socket.on('productLogs', data => {
+        const log = document.getElementById('title-product');
+        const ListProducts = '';
+        data.forEach(ListProduct => {
+            ListProducts = ListProducts.ListProduct + 'Producto agregados: <br>'
+        })
+        log.innerHTML = ListProducts;
+    })
+
+</script>
 <script src="/src/public/index.js"></script>
 
 </html>
