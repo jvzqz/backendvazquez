@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+</head>
+<body>
+    <div>
+        <input type="text" id="chatBox">
+    </div>
+    <div>
+        <p id="messagesLog"></p>
+    </div>    
+</body>
+<script src='socket.io/socket.io.js'>
+    const socket = io();
+    const chatBox = document.getElementById('chatBox')
+
+    chatBox.addEventListener('keyup', evento => {
+       if(evento.key === 'Enter') {
+           if(chatBok.value.trim > 0) {
+            socket.emit('message', { message: ChatBox.value})
+           chatBox.value= ''
+           }
+       }
+    })
+
+    socket.on('messagesLogs', data => {
+        let log = document.getElementById('messagesLogs');
+        let messages = '';
+        data.forEach(message => {
+            messages= messages +  dice: ${messages.message} <br>
+        })
+        log.innerHTML = messages;
+    })
+
+</script>
+<script src="/src/public/index.js"></script>
+</html>
